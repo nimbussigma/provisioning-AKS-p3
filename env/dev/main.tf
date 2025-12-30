@@ -26,3 +26,14 @@ module "network" {
   subnet_bastion_vm_cidr    = var.subnet_bastion_vm_cidr
   subnet_azure_bastion_cidr = var.subnet_azure_bastion_cidr
 }
+
+module "bastion" {
+  source = "../../modules/bastion"
+
+  name_prefix         = local.name_prefix
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  subnet_id           = module.network.subnet_bastion_vm_id
+  admin_username      = var.admin_username
+  tags                = local.tags
+}
