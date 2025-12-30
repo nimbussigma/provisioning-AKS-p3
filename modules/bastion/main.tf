@@ -28,7 +28,7 @@ resource "azurerm_linux_virtual_machine" "bastion_vm" {
   name                = "vm-bastion-${var.name_prefix}"
   location            = var.location
   resource_group_name = var.resource_group_name
-  size                = "Standard_B1s"
+  size                = "Standard_D2s_v3"
   admin_username      = var.admin_username
 
   network_interface_ids = [
