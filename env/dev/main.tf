@@ -37,3 +37,16 @@ module "bastion" {
   admin_username      = var.admin_username
   tags                = local.tags
 }
+
+module "aks" {
+  source = "../../modules/aks"
+
+  name_prefix         = local.name_prefix
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  tags                = local.tags
+
+  aks_name           = var.aks_name
+  subnet_system_id   = module.network.subnet_system_id
+  subnet_workload_id = module.network.subnet_workload_id
+}
